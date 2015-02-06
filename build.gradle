@@ -2,12 +2,3 @@ apply plugin: 'de.dfki.mary.voicebuilding'
 
 group 'de.dfki.mary'
 version '5.1.2'
-
-voice {
-    name 'upmc-jessica'
-    language 'fr'
-    gender 'female'
-    type 'unit selection'
-    description 'A female French unit selection voice, built at ISIR (UPMC) using data recorded by Jessica Durand'
-    samplingRate 16000
-}
