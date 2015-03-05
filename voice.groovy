@@ -1,6 +1,8 @@
 voice {
     name = 'upmc-jessica'
-    language = 'fr'
+    locale {
+        language = 'fr'
+    }
     gender = 'female'
     type = 'unit selection'
     description = 'A female French unit selection voice, built at ISIR (UPMC) using data recorded by Jessica Durand'
