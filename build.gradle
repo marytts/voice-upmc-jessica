@@ -37,3 +37,8 @@ task downloadData(type: Download) {
     overwrite false
     acceptAnyCertificate true
 }
+
+wav {
+    srcDir = file("$processDataResources.destinationDir/audio")
+    srcFileExt = 'flac'
+}
