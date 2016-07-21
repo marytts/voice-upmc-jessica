@@ -80,7 +80,22 @@ legacyInit {
         basenameListFile.withWriter { basenameList ->
             def wavSet = fileTree(wav.destDir).collect { it.name - '.wav' } as Set
             def labSet = fileTree("$buildDir/lab").collect { it.name - '.lab' } as Set
-            wavSet.intersect(labSet).each {
+            wavSet.intersect(labSet).minus([
+                    'text_0237',
+                    'text_0281',
+                    'text_0292',
+                    'text_0337',
+                    'text_0341',
+                    'text_0346',
+                    'text_0363',
+                    'text_0411',
+                    'text_0512',
+                    'text_0529',
+                    'text_0530',
+                    'text_0578',
+                    'text_0624',
+                    'text_0643'
+            ]).each {
                 basenameList.writeLine it
             }
         }
