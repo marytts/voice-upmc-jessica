@@ -40,7 +40,9 @@ task downloadData(type: Download) {
 
 processDataResources {
     dependsOn downloadAudio, downloadData
-    from tarTree(downloadAudio.destFile)
+    from tarTree(downloadAudio.destFile), {
+        exclude { it.name =~ /.+[a-z]\..+/ }
+    }
     from zipTree(downloadData.destFile), {
         include '**/*.txt', '**/*.lab'
         filesMatching '**/*.txt', {
