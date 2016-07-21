@@ -78,9 +78,9 @@ legacyInit {
     outputs.files basenameListFile
     doLast {
         basenameListFile.withWriter { basenameList ->
-            fileTree(wav.destDir).collect {
-                it.name - '.wav'
-            }.each {
+            def wavSet = fileTree(wav.destDir).collect { it.name - '.wav' } as Set
+            def labSet = fileTree("$buildDir/lab").collect { it.name - '.lab' } as Set
+            wavSet.intersect(labSet).each {
                 basenameList.writeLine it
             }
         }
