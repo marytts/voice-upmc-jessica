@@ -74,4 +74,15 @@ task lab(type: Copy) {
 
 legacyInit {
     dependsOn wav, text, lab
+    def basenameListFile = file("$buildDir/basenames.lst")
+    outputs.files basenameListFile
+    doLast {
+        basenameListFile.withWriter { basenameList ->
+            fileTree(wav.destDir).collect {
+                it.name - '.wav'
+            }.each {
+                basenameList.writeLine it
+            }
+        }
+    }
 }
