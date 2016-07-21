@@ -29,3 +29,11 @@ task downloadAudio(type: Download) {
     overwrite false
     acceptAnyCertificate true
 }
+
+task downloadData(type: Download) {
+    ext.destFile = file("$buildDir/upmc-jessica-data.zip")
+    src "https://github.com/marytts/upmc-jessica-data/archive/v0.1.zip"
+    dest destFile
+    overwrite false
+    acceptAnyCertificate true
+}
