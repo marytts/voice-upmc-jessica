@@ -38,7 +38,38 @@ task downloadData(type: Download) {
     acceptAnyCertificate true
 }
 
+processDataResources {
+    dependsOn downloadAudio, downloadData
+    from tarTree(downloadAudio.destFile)
+    from zipTree(downloadData.destFile), {
+        include '**/*.txt', '**/*.lab'
+        filesMatching '**/*.txt', {
+            path = "text/$it.name"
+        }
+        filesMatching '**/*.lab', {
+            path = "lab/$it.name"
+        }
+        includeEmptyDirs = false
+    }
+}
+
 wav {
     srcDir = file("$processDataResources.destinationDir/audio")
     srcFileExt = 'flac'
+}
+
+task text(type: Copy) {
+    from processDataResources
+    into buildDir
+    include 'text/*.txt'
+}
+
+task lab(type: Copy) {
+    from processDataResources
+    into buildDir
+    include 'lab/*.lab'
+}
+
+legacyInit {
+    dependsOn wav, text, lab
 }
